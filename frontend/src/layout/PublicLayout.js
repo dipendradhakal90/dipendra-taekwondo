@@ -146,100 +146,93 @@ export default function PublicLayout({ children }) {
 
   return (
     <div className={cx("min-h-screen flex flex-col transition-colors duration-300", isDark ? "bg-slate-950" : "bg-white")}>
-      <header className={cx("sticky top-0 z-[99] border-b transition-all duration-300", isDark ? "border-white/10 bg-slate-900/95 backdrop-blur-xl" : "border-black/10 bg-white/95 backdrop-blur-xl")}>
-        <div className="[padding-left:max(1rem,calc(env(safe-area-inset-left)+1rem))][padding-right:max(1rem,calc(env(safe-area-inset-right)+1rem))] px-[clamp(0.75rem,4vw,1.25rem)] h-[clamp(4.5rem,12vh,5.5rem)] flex items-center justify-between gap-[clamp(0.375rem,1.5vw,1rem)]">
-          <div className="flex flex-1 items-center gap-[clamp(0.25rem,1.5vw,0.75rem)] min-w-0">
-            <Link to="/" className="flex items-center gap-[clamp(0.25rem,1vw,0.5rem)] [&>*]:shrink-0">
-              <div className={cx(
-                "h-[clamp(2.75rem,9vh,4rem)] aspect-square rounded-full overflow-hidden border-[clamp(0.2rem,0.6vw,0.375rem)] shrink-0 bg-gradient-to-br",
-                isDark ? "border-slate-600/80 bg-slate-800/50" : "border-slate-200 bg-slate-100"
-              )}>
-                {ownerImage ? (
-                  <img
-                    src={ownerImage}
-                    alt={ownerName}
-                    className="h-full w-full object-cover rounded-full"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className={cx("h-full w-full grid place-items-center text-[clamp(0.875rem,2.5vw,1.125rem)] font-bold", isDark ? "text-slate-300" : "text-slate-700")}>
-                    DD
+      <header className={cx("sticky top-0 z-40 border-b transition-colors duration-300 overflow-hidden", isDark ? "border-white/10 bg-slate-900/80" : "border-black/10 bg-white/80", "backdrop-blur")}>
+        <div className="w-full px-4 sm:px-6 lg:px-8 h-20 sm:h-24 lg:h-28 flex items-center justify-between gap-3 sm:gap-4">
+            {/* Left Section */}
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+              <Link to="/" className="flex items-center gap-2 sm:gap-3">
+                <div className={cx("h-14 w-14 sm:h-16 sm:w-16 lg:h-20 lg:w-20 rounded-full overflow-hidden border-4 shrink-0 flex", isDark ? "border-slate-500 bg-slate-800" : "border-slate-200 bg-slate-100")}>
+                  {ownerImage ? (
+                    <img
+                      src={ownerImage}
+                      alt={ownerName}
+                      className="h-full w-full object-cover rounded-full"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className={cx("h-full w-full grid place-items-center text-lg font-bold", isDark ? "text-slate-300" : "text-slate-700")}>
+                      DD
+                    </div>
+                  )}
+                </div>
+                <div className="leading-tight min-w-0 max-w-[200px] sm:max-w-[280px] lg:max-w-[380px]">
+                  <div className="inline-block rounded-lg bg-[#0b1f4d] text-white font-bold px-2 py-1 sm:px-4 sm:py-2 text-base sm:text-xl lg:text-2xl truncate">
+                    {ownerName}
                   </div>
+                  <div className={cx("mt-0.5 text-xs sm:text-sm lg:text-base font-medium truncate", isDark ? "text-white/70" : "text-black/60")}>
+                    {ownerTitle}
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+              {/* Responsive Nepal flag */}
+              <div className="hidden sm:ml-4 sm:block w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 mx-auto">
+                <Lottie
+                  animationData={nepalFlagAnimation}
+                  loop={true}
+                  autoplay={true}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+
+            {/* Right Section */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {/* Dark mode toggle */}
+              <button
+                onClick={toggleDarkMode}
+                className={cx(
+                  "h-8 w-8 rounded-full flex items-center justify-center p-0",
+                  isDark
+                    ? "bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 hover:text-yellow-200"
+                    : "bg-slate-900/10 border border-slate-900/30 text-slate-700 hover:text-slate-900"
                 )}
-              </div>
-              <div className="min-w-0 flex-1 max-w-[55vw]">
-                <div className="inline-block rounded-lg bg-[#0b1f4d] text-white font-bold px-[clamp(0.375rem,1.5vw,0.75rem)] py-[clamp(0.25rem,0.75vh,0.375rem)] text-[clamp(0.875rem,2.5vw,1.125rem)] leading-none whitespace-nowrap overflow-hidden text-ellipsis">
-                  {ownerName}
-                </div>
-                <div className={cx(
-                  "mt-[clamp(0.125rem,0.5vh,0.25rem)] text-[clamp(0.625rem,1.75vw,0.875rem)] font-medium overflow-hidden text-ellipsis",
-                  isDark ? "text-white/70" : "text-black/60"
-                )}>
-                  {ownerTitle}
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* Nepal flag - optional on very small screens */}
-          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-[clamp(3.5rem,11vw,4.5rem)] h-[clamp(4rem,13vh,5.5rem)] mx-[clamp(0.5rem,1.5vw,1rem)]">
-            <Lottie
-              animationData={nepalFlagAnimation}
-              loop={true}
-              autoplay={true}
-              className="w-full h-full [&>path]:!stroke-current"
-            />
-          </div>
-
-          {/* Right: controls */}
-          <div className="flex items-center gap-[clamp(0.375rem,1.25vw,0.75rem)] flex-shrink-0 [&>*]:shrink-0">
-            {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-1 lg:gap-1.5">
-              {navItems.map((item) => (
-                <NavItem key={item.to} to={item.to} label={item.label} isDark={isDark} />
-              ))}
-            </nav>
-            
-            {/* Dark toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className={cx(
-                "h-8 w-8 rounded-full flex items-center justify-center p-0 shadow-sm transition-all",
-                isDark
-                  ? "bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 hover:text-yellow-200 hover:shadow-md"
-                  : "bg-slate-900/10 border border-slate-900/30 text-slate-700 hover:text-slate-900 hover:shadow-md"
-              )}
-              title="Toggle dark mode"
-              aria-label="Toggle dark mode"
-            >
-              {isDark ? (
-                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
-              ) : (
-                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.536l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.464 5.464a1 1 0 00-1.414 1.414l.707.707a1 1 0 101.414-1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
-              )}
-            </button>
-            
-            {/* Hamburger - highest priority */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className={cx(
-                "lg:hidden w-11 h-11 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all shrink-0",
-                isDark
-                  ? "bg-white/15 backdrop-blur-sm border border-white/20 text-white hover:bg-white/25"
-                  : "bg-white/80 backdrop-blur border border-black/10 text-black hover:bg-white shadow-md hover:shadow-lg"
-              )}
-              aria-label="Toggle menu"
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-            >
-              {mobileOpen ? <X size={22} className="shrink-0" /> : <Menu size={22} className="shrink-0" />}
-            </button>
-          </div>
-        </div>
+                title="Toggle dark mode"
+                aria-label="Toggle dark mode"
+              >
+                {isDark ? (
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.536l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.464 5.464a1 1 0 00-1.414 1.414l.707.707a1 1 0 101.414-1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </button>
+              
+              {/* Desktop nav */}
+              <nav className="hidden lg:flex items-center gap-2 lg:gap-3">
+                {navItems.map((item) => (
+                  <NavItem key={item.to} to={item.to} label={item.label} isDark={isDark} />
+                ))}
+              </nav>
+              
+              {/* Hamburger - mobile */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className={cx(
+                  "lg:hidden p-2.5 rounded-xl transition-all shadow-md hover:shadow-lg",
+                  isDark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-black/5 hover:bg-black/10 text-black"
+                )}
+                aria-label="Toggle menu"
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-nav"
+              >
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div> {/* Right Section */}
+          </div> {/* Navbar container */}
 
         <AnimatePresence>
           {mobileOpen && (
@@ -281,7 +274,7 @@ export default function PublicLayout({ children }) {
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.536l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.464 5.464a1 1 0 00-1.414 1.414l.707.707a1 1 0 101.414-1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
                         </svg>
-                      )}
+                        )}
                     </button>
                   </div>
                 </div>
@@ -300,4 +293,3 @@ export default function PublicLayout({ children }) {
     </div>
   );
 }
-
