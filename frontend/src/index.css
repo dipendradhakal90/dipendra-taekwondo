@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { @apply bg-white text-black dark:bg-slate-900 dark:text-white; overflow-x: hidden; }
+img, video, canvas, svg { max-width: 100%; }
+
+::selection { background: rgba(239, 68, 68, 0.25); }
+
+/* Kabiraj-style title treatment: uppercase for major headings/big display text */
+h1, h2, h3, h4,
+[class*="text-2xl"],
+[class*="text-3xl"],
+[class*="text-4xl"],
+[class*="text-5xl"],
+[class*="text-6xl"] {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+  h1, h2, h3, h4,
+  [class*="text-2xl"],
+  [class*="text-3xl"],
+  [class*="text-4xl"],
+  [class*="text-5xl"],
+  [class*="text-6xl"] {
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+  }
+}
+
+/* Smooth scrollbar (optional) */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+/* Reusable input style */
+.input {
+  @apply w-full rounded-2xl border px-4 py-3 outline-none focus:ring-2 transition-colors;
+  @apply bg-white text-slate-900 border-black/10 focus:ring-black/10;
+  @apply dark:bg-slate-900 dark:text-white dark:border-white/10 dark:focus:ring-white/10;
+}
+
+/* Glass surface */
+.glass {
+  @apply bg-white/70 backdrop-blur border border-black/10;
+  @apply dark:bg-slate-900/60 dark:border-white/10;
+}
+
+/* Dark-mode overrides for commonly-used explicit black/white utility classes.
+   These broad rules help components that use explicit `text-black`, `bg-white`,
+   `border-black`, etc. to render correctly when the `.dark` class is present. */
+.dark [class*="text-black"] {
+  color: rgba(255,255,255,var(--tw-text-opacity,1)) !important;
+}
+.dark [class*="text-black/90"] { color: rgba(255,255,255,0.9) !important; }
+.dark [class*="text-black/80"] { color: rgba(255,255,255,0.8) !important; }
+.dark [class*="text-black/70"] { color: rgba(255,255,255,0.7) !important; }
+.dark [class*="text-black/65"] { color: rgba(255,255,255,0.65) !important; }
+.dark [class*="text-black/60"] { color: rgba(255,255,255,0.6) !important; }
+.dark [class*="text-black/55"] { color: rgba(255,255,255,0.55) !important; }
+.dark [class*="text-black/50"] { color: rgba(255,255,255,0.5) !important; }
+.dark [class*="text-black/45"] { color: rgba(255,255,255,0.45) !important; }
+.dark [class*="text-black/40"] { color: rgba(255,255,255,0.4) !important; }
+
+/* Map white backgrounds to dark surfaces in dark mode */
+.dark [class*="bg-white"] {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+.dark [class*="bg-white/90"] { background-color: rgba(15,23,42,0.9) !important; }
+.dark [class*="bg-white/80"] { background-color: rgba(15,23,42,0.8) !important; }
+.dark [class*="bg-white/70"] { background-color: rgba(15,23,42,0.7) !important; }
+.dark [class*="bg-white/60"] { background-color: rgba(15,23,42,0.6) !important; }
+.dark [class*="bg-white/50"] { background-color: rgba(15,23,42,0.5) !important; }
+
+/* Borders that used to be black should be light on dark backgrounds */
+.dark [class*="border-black"] { border-color: rgba(255,255,255,0.08) !important; }
+.dark [class*="border-black/10"] { border-color: rgba(255,255,255,0.1) !important; }
+
+/* Hover helpers: convert black hover backgrounds to subtle light on dark */
+.dark [class*="hover:bg-black"]:hover { background-color: rgba(255,255,255,0.06) !important; }
+
+/* Scrollbar for dark */
+.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
+
+/* Specific reusable components adjustments for dark mode */
+
+/* Country flags continuous marquee */
+.country-flags-marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.country-flags-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  animation: country-flags-marquee 26s linear infinite;
+}
+
+@keyframes country-flags-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+#nprogress .bar {
+  height: 3px !important;
+}
+#nprogress .peg {
+  box-shadow: 0 0 10px rgba(0,0,0,0.25), 0 0 5px rgba(0,0,0,0.15) !important;
+}

@@ -1,0 +1,74 @@
+.cert-section {
+  padding: 90px 8%;
+  background: transparent;
+  color: rgb(17 24 39);
+}
+
+/* Dark mode */
+.dark .cert-section {
+  background: #0a0f1c;
+  color: #fff;
+}
+
+/* Header */
+.cert-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.cert-header h2 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.cert-header p {
+  color: rgba(17, 24, 39, 0.7);
+}
+.dark .cert-header p { color: rgba(255, 255, 255, 0.7); }
+
+/* Grid */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+/* Card */
+.cert-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.35s ease;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.06);
+}
+
+.cert-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: contain;
+  margin-bottom: 18px;
+}
+
+.cert-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.cert-card span {
+  font-size: 0.85rem;
+  color: #ff4d4d;
+}
+
+/* Dark mode card appearance */
+.dark .cert-card {
+  background: linear-gradient(145deg, #0e1530, #0b1022);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
