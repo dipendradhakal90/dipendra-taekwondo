@@ -25,7 +25,7 @@ app.disable("x-powered-by");
 /* =========================
    MIDDLEWARE
 ========================= */
-const corsOrigins = (process.env.CORS_ORIGINS || "http://localhost:3000")
+const corsOrigins = (process.env.CORS_ORIGINS || "http://localhost:3000,https://dipendra-taekwondo.vercel.app")
   .split(",")
   .map((x) => x.trim())
   .filter(Boolean);
