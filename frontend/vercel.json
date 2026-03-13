@@ -1,25 +1,6 @@
 {
+  "framework": "create-react-app",
   "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "framework": "create-react-app",
-  "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "destination": "http://localhost:8000/api/$1",
-      "has": [
-        {
-          "type": "host",
-          "value": "localhost:8000"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "http://localhost:8000/api/:path*"
-    }
-  ]
+  "trailingSlash": false
 }
-
