@@ -13,10 +13,12 @@
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.563.0",
     "nprogress": "^0.2.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-"react-helmet-async":"^2.1.0"
-    "react-hot-toast": "^2.6.0",
+
+"react": "^18.3.1",
+"react-dom": "^18.3.1",
+"react-helmet-async": "^2.0.5",
+"react-hot-toast": "^2.6.0",
+
     "react-router-dom": "^7.13.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
