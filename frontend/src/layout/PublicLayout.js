@@ -147,12 +147,11 @@ export default function PublicLayout({ children }) {
   return (
     <div className={cx("min-h-screen flex flex-col transition-colors duration-300", isDark ? "bg-slate-950" : "bg-white")}>
       <header className={cx("sticky top-0 z-40 border-b transition-colors duration-300 overflow-hidden", isDark ? "border-white/10 bg-slate-900/80" : "border-black/10 bg-white/80", "backdrop-blur")}>
-        <div className="w-full px-4 lg:px-10 lg:-ml-12 flex items-center justify-start">
-          <div className="relative flex h-[132px] items-center justify-between w-full gap-2 ml-12">
-            {/* Left section - Logo + Profile info */}
-            <div className="flex items-center gap-2 sm:gap-4 min-w-0 shrink-0">
-              <Link to="/" className="flex items-center gap-2 sm:gap-4 min-w-0">
-                <div className={cx("h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 rounded-full overflow-hidden border-[4px] lg:border-[5px] shrink-0", isDark ? "border-slate-600 bg-slate-800" : "border-slate-200 bg-slate-100")}>
+        <div className="w-full px-4 sm:px-6 lg:px-8 h-20 sm:h-24 lg:h-28 flex items-center justify-between gap-3 sm:gap-4">
+            {/* Left Section */}
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+              <Link to="/" className="flex items-center gap-2 sm:gap-3">
+                <div className={cx("h-14 w-14 sm:h-16 sm:w-16 lg:h-20 lg:w-20 rounded-full overflow-hidden border-4 shrink-0 flex", isDark ? "border-slate-500 bg-slate-800" : "border-slate-200 bg-slate-100")}>
                   {ownerImage ? (
                     <img
                       src={ownerImage}
@@ -167,36 +166,33 @@ export default function PublicLayout({ children }) {
                   )}
                 </div>
                 <div className="leading-tight min-w-0 max-w-[200px] sm:max-w-[280px] lg:max-w-[380px]">
-                  <div className="inline-block rounded-lg bg-[#0b1f4d] text-white font-bold px-2 py-1 sm:px-4 sm:py-2 text-lg sm:text-2xl lg:text-3xl whitespace-nowrap">
+                  <div className="inline-block rounded-lg bg-[#0b1f4d] text-white font-bold px-2 py-1 sm:px-4 sm:py-2 text-base sm:text-xl lg:text-2xl truncate">
                     {ownerName}
                   </div>
-                  <div className={cx("mt-0.5 text-sm sm:text-lg lg:text-xl font-medium whitespace-nowrap", isDark ? "text-white/70" : "text-black/60")}>
+                  <div className={cx("mt-0.5 text-xs sm:text-sm lg:text-base font-medium truncate", isDark ? "text-white/70" : "text-black/60")}>
                     {ownerTitle}
                   </div>
                 </div>
               </Link>
             </div>
 
-            {/* Nepal Flag - placed between profile text and nav */}
-            <div className="hidden md:flex items-center justify-center min-w-[110px] lg:min-w-[130px]">
-              <Lottie
-                animationData={nepalFlagAnimation}
-                loop={true}
-                autoplay={true}
-                style={{ width: "110px", height: "130px", minWidth: "110px" }}
-              />
-            </div>
+              {/* Responsive Nepal flag */}
+              <div className="hidden sm:ml-4 sm:block w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 mx-auto">
+                <Lottie
+                  animationData={nepalFlagAnimation}
+                  loop={true}
+                  autoplay={true}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
 
-            {/* Right section - Nav */}
-            <nav className="hidden lg:flex items-center gap-2 lg:gap-3 2xl:gap-4 shrink-0">
-              {navItems.map((item) => (
-                <NavItem key={item.to} to={item.to} label={item.label} isDark={isDark} />
-              ))}
-              {/* Dark mode toggle - placed beside Contact */}
+            {/* Right Section */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {/* Dark mode toggle */}
               <button
                 onClick={toggleDarkMode}
                 className={cx(
-                  "h-8 w-8 rounded-full flex items-center justify-center shrink-0 p-0",
+                  "h-8 w-8 rounded-full flex items-center justify-center p-0",
                   isDark
                     ? "bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 hover:text-yellow-200"
                     : "bg-slate-900/10 border border-slate-900/30 text-slate-700 hover:text-slate-900"
@@ -214,57 +210,29 @@ export default function PublicLayout({ children }) {
                   </svg>
                 )}
               </button>
-            </nav>
-
-            <div className="flex items-center gap-2 sm:gap-4 xl:hidden">
-              {/* Dark mode toggle (desktop) */}
-              <button
-                onClick={toggleDarkMode}
-                className={cx(
-                  "hidden sm:inline-flex h-8 w-8 rounded-full flex items-center justify-center shrink-0 p-0",
-                  isDark
-                    ? "bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 hover:text-yellow-200"
-                    : "bg-slate-900/10 border border-slate-900/30 text-slate-700 hover:text-slate-900"
-                )}
-                title="Toggle dark mode"
-                aria-label="Toggle dark mode"
-              >
-                {isDark ? (
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.536l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.464 5.464a1 1 0 00-1.414 1.414l.707.707a1 1 0 101.414-1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                  </svg>
-                )}
-              </button>
-
+              
+              {/* Desktop nav */}
+              <nav className="hidden lg:flex items-center gap-2 lg:gap-3">
+                {navItems.map((item) => (
+                  <NavItem key={item.to} to={item.to} label={item.label} isDark={isDark} />
+                ))}
+              </nav>
+              
+              {/* Hamburger - mobile */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className={cx("hidden sm:inline-flex xl:hidden p-3 rounded-lg transition", isDark ? "hover:bg-white/10" : "hover:bg-black/5")}
+                className={cx(
+                  "lg:hidden p-2.5 rounded-xl transition-all shadow-md hover:shadow-lg",
+                  isDark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-black/5 hover:bg-black/10 text-black"
+                )}
                 aria-label="Toggle menu"
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-nav"
               >
-                {mobileOpen ? <X size={30} className={isDark ? "text-white" : "text-black"} /> : <Menu size={30} className={isDark ? "text-white" : "text-black"} />}
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
-            </div>
-
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className={cx(
-                "sm:hidden p-1 rounded-md transition self-center",
-                isDark ? "hover:bg-white/10 text-white" : "hover:bg-black/5 text-black"
-              )}
-              aria-label="Toggle menu"
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-            >
-              {mobileOpen ? <X size={26} /> : <Menu size={26} />}
-            </button>
-          </div>
-        </div>
+            </div> {/* Right Section */}
+          </div> {/* Navbar container */}
 
         <AnimatePresence>
           {mobileOpen && (
